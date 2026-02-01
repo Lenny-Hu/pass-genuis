@@ -2,6 +2,9 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   output: 'export',
+  basePath: '/pass-genuis',
+  assetPrefix: '/pass-genuis/',
+  trailingSlash: false,
   /* config options here */
   typescript: {
     ignoreBuildErrors: true,
