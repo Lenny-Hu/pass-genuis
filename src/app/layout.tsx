@@ -3,25 +3,17 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { SWRegister } from '@/components/sw-register';
 import { I18nProviderClient } from '@/i18n/client';
-import { getI18n } from '@/i18n/server';
-import { cookies } from 'next/headers';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const cookieStore = cookies();
-  const locale = cookieStore.get('next-international')?.value || 'zh';
-  const t = await getI18n(locale);
- 
-  return {
-    title: t('app.title'),
-    description: t('app.description'),
-    manifest: '/manifest.json',
-    appleWebApp: {
-      capable: true,
-      statusBarStyle: 'default',
-      title: t('app.title'),
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: '密码生成器',
+  description: '一个使用主密钥和盐的安全密码生成器。',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: '密码生成器',
+  },
+};
 
 export const viewport: Viewport = {
   themeColor: '#D2DFF7',
@@ -32,11 +24,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = cookies();
-  const locale = cookieStore.get('next-international')?.value || 'zh';
-
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang="zh" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -46,7 +35,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png"></link>
       </head>
       <body className="font-body antialiased">
-        <I18nProviderClient locale={locale}>
+        <I18nProviderClient>
           {children}
           <Toaster />
           <SWRegister />
