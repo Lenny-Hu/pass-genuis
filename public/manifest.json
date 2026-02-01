@@ -1,0 +1,24 @@
+{
+  "name": "PassGenius",
+  "short_name": "PassGenius",
+  "description": "A simple and secure PWA password generator based on SHA-256.",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#D2DFF7",
+  "background_color": "#D2DFF7",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}
