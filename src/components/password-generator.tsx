@@ -131,6 +131,7 @@ export function PasswordGenerator() {
               <Label htmlFor="password">{t('master.password')}</Label>
               <div className="relative">
                 <Input 
+                  key={`password-${isMasterPasswordVisible}`}
                   id="password" 
                   type={isMasterPasswordVisible ? 'text' : 'password'} 
                   placeholder={t('master.password.placeholder')} 
@@ -153,6 +154,7 @@ export function PasswordGenerator() {
               <Label htmlFor="salt">{t('salt.keyword')}</Label>
               <div className="relative">
                 <Input 
+                  key={`salt-${isSaltVisible}`}
                   id="salt" 
                   type={isSaltVisible ? 'text' : 'password'}
                   placeholder={t('salt.keyword.placeholder')} 
