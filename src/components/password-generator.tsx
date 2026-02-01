@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -17,6 +17,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useToast } from '@/hooks/use-toast';
 import { KeyRound, Lock, Copy, Check, Eye, EyeOff } from 'lucide-react';
 import { useI18n } from '@/components/providers';
+import { Switch } from '@/components/ui/switch';
 
 type GenerationType = 'general' | '6-digit' | '8-digit';
 
@@ -31,7 +32,13 @@ export function PasswordGenerator() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isMasterPasswordVisible, setIsMasterPasswordVisible] = useState(false);
   const [isSaltVisible, setIsSaltVisible] = useState(false);
+  const [addYear, setAddYear] = useState(false);
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const { toast } = useToast();
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   const sha256 = async (str: string) => {
     const buffer = new TextEncoder().encode(str);
@@ -54,7 +61,8 @@ export function PasswordGenerator() {
     setGeneratedPassword('');
 
     try {
-      const hash = await sha256(password + salt);
+      const finalSalt = addYear ? salt + currentYear : salt;
+      const hash = await sha256(password + finalSalt);
       let result = '';
 
       switch (generationType) {
@@ -185,6 +193,12 @@ export function PasswordGenerator() {
                       </div>
                   ))}
               </RadioGroup>
+          </div>
+          <div className="flex items-center space-x-3 rounded-md border p-4">
+              <Switch id="add-year" checked={addYear} onCheckedChange={setAddYear} />
+              <Label htmlFor="add-year" className="cursor-pointer">
+                {t('add.year')} ({currentYear})
+              </Label>
           </div>
           <Button onClick={handleGenerate} className="w-full" size="lg" disabled={isLoading}>
               <KeyRound className="mr-2 h-5 w-5" />

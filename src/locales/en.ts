@@ -32,4 +32,5 @@ export default {
   'hide.password': 'Hide password',
   'show.salt': 'Show salt',
   'hide.salt': 'Hide salt',
+  'add.year': 'Add year',
 } as const;

@@ -32,4 +32,5 @@ export default {
   'hide.password': '隐藏密码',
   'show.salt': '显示盐',
   'hide.salt': '隐藏盐',
+  'add.year': '添加年份',
 } as const;
