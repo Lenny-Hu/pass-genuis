@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -37,6 +37,12 @@ export function PasswordGenerator() {
   const [autoCopy, setAutoCopy] = useState(false);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const { toast } = useToast();
+  
+  const formattedGeneratedPassword = useMemo(() => {
+    if (!generatedPassword) return '';
+    const mid = Math.ceil(generatedPassword.length / 2);
+    return `${generatedPassword.slice(0, mid)} ${generatedPassword.slice(mid)}`;
+  }, [generatedPassword]);
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
@@ -246,8 +252,8 @@ export function PasswordGenerator() {
             </DialogDescription>
           </DialogHeader>
           <div className="relative w-full rounded-lg border bg-secondary p-4 mt-2">
-            <p className="font-code text-lg tracking-wider break-all text-secondary-foreground">
-              {generatedPassword}
+            <p className="font-code text-lg tracking-wider break-all text-chart-5">
+              {formattedGeneratedPassword}
             </p>
             <Button variant="ghost" size="icon" className="absolute top-1/2 right-2 -translate-y-1/2 text-muted-foreground hover:text-foreground" onClick={handleCopy}>
                 {isCopied ? <Check className="h-5 w-5 text-green-500" /> : <Copy className="h-5 w-5" />}
