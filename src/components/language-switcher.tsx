@@ -14,7 +14,7 @@ export function LanguageSwitcher() {
   const { locale, setLocale, t } = useI18n();
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed top-4 right-4 z-50">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">
