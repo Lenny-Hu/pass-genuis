@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Paintbrush } from 'lucide-react';
 import { useTheme } from '@/components/providers';
 import { themes } from '@/lib/themes';
-import { useI18n } from '@/components/providers';
+import { useI18n, type Translations } from '@/components/providers';
 
 export function ThemeSwitcher() {
   const { theme: activeTheme, setTheme } = useTheme();
@@ -35,7 +35,7 @@ export function ThemeSwitcher() {
             onClick={() => setTheme(theme.name)}
             disabled={activeTheme === theme.name}
           >
-            {theme.label}
+            {t(`theme.${theme.name}` as keyof Translations)}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

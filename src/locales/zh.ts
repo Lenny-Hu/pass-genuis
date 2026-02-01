@@ -37,4 +37,10 @@ export default {
   'copy.to.clipboard': '写入粘贴板',
   'theme.switch': '切换主题',
   'theme.select': '选择主题',
+  'theme.default': '默认',
+  'theme.rose': '玫瑰',
+  'theme.mint': '薄荷',
+  'theme.golden': '流金',
+  'theme.violet': '紫罗兰',
+  'theme.sunset': '落日',
 } as const;

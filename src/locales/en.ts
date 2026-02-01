@@ -37,4 +37,10 @@ export default {
   'copy.to.clipboard': 'Copy to clipboard',
   'theme.switch': 'Switch theme',
   'theme.select': 'Select a theme',
+  'theme.default': 'Default',
+  'theme.rose': 'Rose',
+  'theme.mint': 'Mint',
+  'theme.golden': 'Golden',
+  'theme.violet': 'Violet',
+  'theme.sunset': 'Sunset',
 } as const;
