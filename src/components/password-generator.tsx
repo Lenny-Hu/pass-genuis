@@ -252,7 +252,7 @@ export function PasswordGenerator() {
             </DialogDescription>
           </DialogHeader>
           <div className="relative w-full rounded-lg border bg-secondary p-4 mt-2">
-            <p className="font-code text-lg tracking-wider break-all text-chart-5">
+            <p className="font-code text-lg tracking-wider break-all text-chart-5 [text-shadow:0_2px_4px_rgba(0,0,0,0.1)]">
               {formattedGeneratedPassword}
             </p>
             <Button variant="ghost" size="icon" className="absolute top-1/2 right-2 -translate-y-1/2 text-muted-foreground hover:text-foreground" onClick={handleCopy}>
