@@ -21,6 +21,8 @@ import { Switch } from '@/components/ui/switch';
 
 type GenerationType = 'general' | '6-digit' | '8-digit';
 
+const SETTINGS_KEY = 'passwordGeneratorSettings';
+
 export function PasswordGenerator() {
   const { t } = useI18n();
   const [password, setPassword] = useState('');
@@ -37,6 +39,45 @@ export function PasswordGenerator() {
   const [autoCopy, setAutoCopy] = useState(false);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const { toast } = useToast();
+
+  // Load settings from localStorage on initial render
+  useEffect(() => {
+    try {
+      const savedSettings = localStorage.getItem(SETTINGS_KEY);
+      if (savedSettings) {
+        const settings = JSON.parse(savedSettings);
+        if (settings.generationType && ['general', '6-digit', '8-digit'].includes(settings.generationType)) {
+          setGenerationType(settings.generationType);
+        }
+        if (typeof settings.addYear === 'boolean') {
+          setAddYear(settings.addYear);
+        }
+        if (typeof settings.addUnderscore === 'boolean') {
+          setAddUnderscore(settings.addUnderscore);
+        }
+        if (typeof settings.autoCopy === 'boolean') {
+          setAutoCopy(settings.autoCopy);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to load settings from localStorage", error);
+    }
+  }, []);
+
+  // Save settings to localStorage whenever they change
+  useEffect(() => {
+    try {
+      const settings = {
+        generationType,
+        addYear,
+        addUnderscore,
+        autoCopy,
+      };
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    } catch (error) {
+      console.error("Failed to save settings to localStorage", error);
+    }
+  }, [generationType, addYear, addUnderscore, autoCopy]);
   
   const formattedGeneratedPassword = useMemo(() => {
     if (!generatedPassword) return '';
