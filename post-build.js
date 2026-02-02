@@ -6,5 +6,5 @@ const path = require('path');
 const noJekyllPath = path.join(__dirname, './out/.nojekyll');
 
 // 新建空的 .nojekyll 文件（无则创建，有则覆盖为空）
-fs.writeFileSync(noJekyllPath, 'hello', 'utf-8');
+fs.writeFileSync(noJekyllPath, '', 'utf-8');
 console.log('✅ 已在 out 目录自动生成 .nojekyll 文件');
