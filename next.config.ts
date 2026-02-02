@@ -1,19 +1,19 @@
-import type {NextConfig} from 'next';
+import type { NextConfig } from 'next';
 import withPWAInit from '@ducanh2912/next-pwa';
 
 const { version } = require('./package.json');
+const basePath = '/pass-genius';
 
 const withPWA = withPWAInit({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
   register: false, // We handle registration in sw-register.tsx to show an update prompt.
-  skipWaiting: true, // This is important for the update prompt to work smoothly.
 });
 
 const nextConfig: NextConfig = {
-  // output: 'export',
-  // basePath: '/pass-genius',
-  // assetPrefix: '/pass-genius/',
+  output: 'export',
+  // basePath,
+  // assetPrefix: `${basePath}/`,
   trailingSlash: false,
   typescript: {
     ignoreBuildErrors: true,
@@ -46,6 +46,7 @@ const nextConfig: NextConfig = {
   },
   env: {
     NEXT_PUBLIC_APP_VERSION: version,
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
 };
 

@@ -12,7 +12,8 @@ export function SWRegister() {
 
   useEffect(() => {
     if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
-      const wb = new Workbox('/sw.js');
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+      const wb = new Workbox(`${basePath}/sw.js`);
 
       const showUpdatePrompt = () => {
         const { dismiss } = toast({
